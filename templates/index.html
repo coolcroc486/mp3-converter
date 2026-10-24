@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>YouTube to MP3 Converter</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  </head>
+  <body>
+    <main class="container">
+      <h1>YouTube to MP3 Converter</h1>
+
+      <form method="POST" action="/">
+        <label for="url">Paste a YouTube video URL</label>
+        <input
+          id="url"
+          name="url"
+          type="text"
+          placeholder="https://www.youtube.com/watch?v=..."
+          required
+        />
+        <button type="submit">Convert to MP3</button>
+      </form>
+
+      {% if error %}
+      <div class="message error">{{ error }}</div>
+      {% endif %}
+
+      {% if success %}
+      <div class="message success">
+        <p>{{ success }}</p>
+        {% if filename and download_url %}
+        <a href="{{ download_url }}" download>Download {{ filename }}</a>
+        {% endif %}
+      </div>
+      {% endif %}
+    </main>
+  </body>
+</html>
